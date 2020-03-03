@@ -9,11 +9,12 @@ class Movie():
         self.rating = rating
         self.releaseDate = releaseDate
 
-    def __str__(self):
-        return ("-" * 80) + "\n" + \
-               "{}".format(self.title).ljust(55, " ") + "  |  " + \
-               "{} h {} min".format(self.getRunningTimeHours(), self.getRunningTimeMins())
-
+    # def __str__(self):
+        #return  + \
+               #"{}".format(self.title).ljust(55, " ") + "  |  " + \
+               #"{} h {} min".format(self.getRunningTimeHours(), self.getRunningTimeMins()) + "  |  " + \
+               #"{}".format(self.rating).rjust(0) + "\n" + \
+               
     def getTitle(self):
         return self.title
 
@@ -40,3 +41,24 @@ class Movie():
 
     def getReleaseDate(self):
         return self.releaseDate
+
+    def formatMovieInfo(self):
+        if len(self.title) <= 55:
+            titleLine1 = self.title
+            titleLine2 = None
+            titleLine3 = None
+        elif len(self.title) > 55 and len(self.title) <= 90:
+            line1BreakIndex = self.title.rfind(" ", 0, 55)
+            titleLine1 = self.title[0:line1BreakIndex]
+            titleLine2 = self.title[line1BreakIndex + 1:len(self.title)]
+            titleLine3 = None
+        else:
+            line1BreakIndex = self.title.rfind(" ", 0, 55)
+            line2BreakIndex = self.title.rfind(" ", line1BreakIndex, 90)
+            titleLine1 = self.title[0:self.title.rfind(" ", 0, 55)]
+            titleLine2 = self.title[line1BreakIndex + 1:line2BreakIndex]
+            titleLine3 = self.title[line2BreakIndex + 1:len(self.title)]
+
+        print(titleLine1)
+        print(titleLine2)
+        print(titleLine3)

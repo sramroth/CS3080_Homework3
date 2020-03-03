@@ -1,2 +1,3 @@
 from Movie import *
-print(Movie("star wars", "action", "jj abrams", "some lady", "rey", 123, "PG-13", "2008"))
+movie = Movie("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa", "action", "jj abrams", "some lady", "rey", 123, "PG-13", "2008")
+movie.formatMovieInfo()
