@@ -34,6 +34,13 @@ def loadFile(message, movies):
 	filename = input(message + "\n")
 	file = open(filename, "r")
 	# TODO: read in the file contents and create movies from the content
+	for line in file:
+		if line.startswith("\""):
+			title = line.split("\"")[1]
+			remainingData = line.split("\"")[2].split(",")
+			movies.append(Movie(title, remainingData[1], remainingData[2], 
+					   remainingData[3],[remainingData[4], remainingData[5], remainingData[6]], 
+						remainingData[7], remainingData[8], remainingData[9].rstrip("\n")))
 
 def searchByTitle(message, movies):
 	criteria = input(message + "\n")
@@ -68,8 +75,8 @@ def searchByReleaseYear(message, movies):
 	# TODO: search the movies by release year where criteria is the user's search term
 
 def printMovies(movies):
-	# TODO: print all of the movies in the parameter's list
-	pass
+	for movie in movies:
+		print(movie)
 
 ###########################################################################
 # Main
