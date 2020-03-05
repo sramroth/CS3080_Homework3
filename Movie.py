@@ -69,7 +69,7 @@ class Movie():
         day = int(self.releaseDate.split("/")[1])
         year = int(self.releaseDate.split("/")[2])
 
-        return datetime.datetime(year, month, day).strftime("%B %d, %Y")
+        return datetime.datetime(year, month, day).strftime("%B %#d, %Y")
 
     def formatMovieInfo(self):
         # Find the breakpoints of the title (for especially long titles)
@@ -79,14 +79,14 @@ class Movie():
             titleLine2 = ""
             titleLine3 = ""
         elif len(self.title) > 55 and len(self.title) <= 90:
-            line1BreakIndex = self.title.rfind(" ", 0, 55)
+            line1BreakIndex = self.title.rfind(" ", 0, 56)
             titleLine1 = self.title[0:line1BreakIndex]
             titleLine2 = self.title[line1BreakIndex + 1:len(self.title)]
             titleLine3 = ""
         else:
-            line1BreakIndex = self.title.rfind(" ", 0, 55)
+            line1BreakIndex = self.title.rfind(" ", 0, 56)
             line2BreakIndex = self.title.rfind(" ", line1BreakIndex, 90)
-            titleLine1 = self.title[0:self.title.rfind(" ", 0, 55)]
+            titleLine1 = self.title[0:self.title.rfind(" ", 0, 56)]
             titleLine2 = self.title[line1BreakIndex + 1:line2BreakIndex]
             titleLine3 = self.title[line2BreakIndex + 1:len(self.title)]
         
@@ -110,4 +110,4 @@ class Movie():
                "Writer:".ljust(10, " ") + self.writer + "\n" + \
                "Genre:".ljust(9, " ") + self.genre.ljust(71, " ") + "\n" + \
                "Stars:".ljust(9, " ") + starsLine.ljust(71, " ") + "\n" + \
-               "Release:".ljust(9, " ") + self.formatReleaseDate()
+               "Release:".ljust(9, " ") + self.formatReleaseDate() + "\n"

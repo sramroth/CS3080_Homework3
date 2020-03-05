@@ -59,70 +59,86 @@ def loadFile(message, movies):
 # Search the "database" for movies with the given title
 def searchByTitle(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	titleRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
 	for movie in movies:
-		if titleRegex.search(movie.title) != None:
-			print(movie)
+		if titleRegex.search(movie.getTitle()) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given genre(s)
 def searchByGenre(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	genreRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
 	for movie in movies:
-		if genreRegex.search(movie.genre) != None:
-			print(movie)
+		if genreRegex.search(movie.getGenre()) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given director
 def searchByDirector(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	directorRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
 	for movie in movies:
-		if directorRegex.search(movie.director) != None:
-			print(movie)
+		if directorRegex.search(movie.getDirector()) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given writer
 def searchByWriter(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	writerRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
 	for movie in movies:
-		if writerRegex.search(movie.writer) != None:
-			print(movie)
+		if writerRegex.search(movie.getWriter()) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given star
 def searchByStar(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	starRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
 	for movie in movies:
-		if starRegex.search(str(movie.stars)) != None:
-			print(movie)
+		if starRegex.search(str(movie.getStars())) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with running time less than
 # the given running time
 def searchByRunningTime(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	for movie in movies:
-		if movie.runningTime < int(criteria):
-			print(movie)
+		if movie.getRunningTime() < int(criteria):
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given rating, exactly
 def searchByRating(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	ratingRegex = re.compile(rf"^{criteria}$", re.IGNORECASE)
 	for movie in movies:
-		if ratingRegex.search(str(movie.rating)) != None:
-			print(movie)
+		if ratingRegex.search(str(movie.getRating())) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
 # Search the "database" for movies with the given release year, exactly
 def searchByReleaseYear(message, movies):
 	criteria = input(message + "\n")
+	foundMovies = []
 	yearRegex = re.compile(rf"^{criteria}$")
 	for movie in movies:
-		if yearRegex.search(movie.releaseDate.split("/")[2]) != None:
-			print(movie)
+		if yearRegex.search(movie.getReleaseDate().split("/")[2]) != None:
+			foundMovies.append(movie)
+	printMovies(foundMovies)
 
-# Print each movie currently in the list
+# Print each movie currently in a given list, sorted by title
 def printMovies(movies):
-	for movie in movies:
+	for movie in sorted(movies, key=lambda movie: movie.getTitle()):
 		print(movie)
 
 ###########################################################################
