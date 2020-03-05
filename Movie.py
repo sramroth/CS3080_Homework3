@@ -1,3 +1,10 @@
+###########################################################################
+# Name: Scott Ramroth
+# Date: March 5th, 2020
+# Email: sramroth@uccs.edu
+# Description: Movie class definition. Creates a searchable "database" of 
+# movies based on given csv files.
+###########################################################################
 
 import datetime
 

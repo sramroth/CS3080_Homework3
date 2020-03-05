@@ -1,3 +1,10 @@
+###########################################################################
+# Name: Scott Ramroth
+# Date: March 5th, 2020
+# Email: sramroth@uccs.edu
+# Description: Creates a searchable "database" of movies based on given 
+# csv files. Boilerplate code provided by Dr. Dana Wortman
+###########################################################################
 
 import re
 import Movie
@@ -30,11 +37,13 @@ def promptForInteger(minimum, maximum, message, errorMessage):
 			response = -1
 	return response
 
+# Load a file with the name given by the user. 
+# Ignore the first line in the file
+# Create movie objects for each line in the file
 def loadFile(message, movies):
 	filename = input(message + "\n")
 	file = open(filename, "r")
-	file.seek(81)
-	for line in file:
+	for line in file.readlines()[1:]:
 		if line.startswith("\""):
 			title = line.split("\"")[1]
 			data = line.split("\"")[2].split(",")
@@ -47,6 +56,7 @@ def loadFile(message, movies):
 								[data[4], data[5], data[6]], 
 								data[7], data[8], data[9].rstrip("\n")))
 
+# Search the "database" for movies with the given title
 def searchByTitle(message, movies):
 	criteria = input(message + "\n")
 	titleRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
@@ -54,6 +64,7 @@ def searchByTitle(message, movies):
 		if titleRegex.search(movie.title) != None:
 			print(movie)
 
+# Search the "database" for movies with the given genre(s)
 def searchByGenre(message, movies):
 	criteria = input(message + "\n")
 	genreRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
@@ -61,6 +72,7 @@ def searchByGenre(message, movies):
 		if genreRegex.search(movie.genre) != None:
 			print(movie)
 
+# Search the "database" for movies with the given director
 def searchByDirector(message, movies):
 	criteria = input(message + "\n")
 	directorRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
@@ -68,6 +80,7 @@ def searchByDirector(message, movies):
 		if directorRegex.search(movie.director) != None:
 			print(movie)
 
+# Search the "database" for movies with the given writer
 def searchByWriter(message, movies):
 	criteria = input(message + "\n")
 	writerRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
@@ -75,6 +88,7 @@ def searchByWriter(message, movies):
 		if writerRegex.search(movie.writer) != None:
 			print(movie)
 
+# Search the "database" for movies with the given star
 def searchByStar(message, movies):
 	criteria = input(message + "\n")
 	starRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
@@ -82,31 +96,34 @@ def searchByStar(message, movies):
 		if starRegex.search(str(movie.stars)) != None:
 			print(movie)
 
+# Search the "database" for movies with running time less than
+# the given running time
 def searchByRunningTime(message, movies):
 	criteria = input(message + "\n")
 	for movie in movies:
 		if movie.runningTime < int(criteria):
 			print(movie)
 
+# Search the "database" for movies with the given rating, exactly
 def searchByRating(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by rating where criteria is the user's search term
 	ratingRegex = re.compile(rf"^{criteria}$", re.IGNORECASE)
 	for movie in movies:
 		if ratingRegex.search(str(movie.rating)) != None:
 			print(movie)
 
+# Search the "database" for movies with the given release year, exactly
 def searchByReleaseYear(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by release year where criteria is the user's search term
 	yearRegex = re.compile(rf"^{criteria}$")
 	for movie in movies:
 		if yearRegex.search(movie.releaseDate.split("/")[2]) != None:
 			print(movie)
 
+# Print each movie currently in the list
 def printMovies(movies):
 	for movie in movies:
-		print(movie) #lambda expression here?
+		print(movie)
 
 ###########################################################################
 # Main
