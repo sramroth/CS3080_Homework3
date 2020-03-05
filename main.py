@@ -33,7 +33,6 @@ def promptForInteger(minimum, maximum, message, errorMessage):
 def loadFile(message, movies):
 	filename = input(message + "\n")
 	file = open(filename, "r")
-	# TODO: read in the file contents and create movies from the content
 	file.seek(81)
 	for line in file:
 		if line.startswith("\""):
@@ -50,39 +49,64 @@ def loadFile(message, movies):
 
 def searchByTitle(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by title where criteria is the user's search term
+	titleRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
+	for movie in movies:
+		if titleRegex.search(movie.title) != None:
+			print(movie)
 
 def searchByGenre(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by genre where criteria is the user's search term
+	genreRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
+	for movie in movies:
+		if genreRegex.search(movie.genre) != None:
+			print(movie)
 
 def searchByDirector(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by director where criteria is the user's search term
+	directorRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
+	for movie in movies:
+		if directorRegex.search(movie.director) != None:
+			print(movie)
 
 def searchByWriter(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by writer where criteria is the user's search term
+	writerRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
+	for movie in movies:
+		if writerRegex.search(movie.writer) != None:
+			print(movie)
 
 def searchByStar(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by star where criteria is the user's search term
+	starRegex = re.compile(rf".*{criteria}.*", re.IGNORECASE)
+	for movie in movies:
+		if starRegex.search(str(movie.stars)) != None:
+			print(movie)
 
 def searchByRunningTime(message, movies):
 	criteria = input(message + "\n")
-	# TODO: search the movies by running time where criteria is the user's search term
+	for movie in movies:
+		if movie.runningTime < int(criteria):
+			print(movie)
 
 def searchByRating(message, movies):
 	criteria = input(message + "\n")
 	# TODO: search the movies by rating where criteria is the user's search term
+	ratingRegex = re.compile(rf"^{criteria}$", re.IGNORECASE)
+	for movie in movies:
+		if ratingRegex.search(str(movie.rating)) != None:
+			print(movie)
 
 def searchByReleaseYear(message, movies):
 	criteria = input(message + "\n")
 	# TODO: search the movies by release year where criteria is the user's search term
+	yearRegex = re.compile(rf"^{criteria}$")
+	for movie in movies:
+		if yearRegex.search(movie.releaseDate.split("/")[2]) != None:
+			print(movie)
 
 def printMovies(movies):
 	for movie in movies:
-		print(movie)
+		print(movie) #lambda expression here?
 
 ###########################################################################
 # Main
