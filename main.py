@@ -34,13 +34,19 @@ def loadFile(message, movies):
 	filename = input(message + "\n")
 	file = open(filename, "r")
 	# TODO: read in the file contents and create movies from the content
+	file.seek(81)
 	for line in file:
 		if line.startswith("\""):
 			title = line.split("\"")[1]
-			remainingData = line.split("\"")[2].split(",")
-			movies.append(Movie(title, remainingData[1], remainingData[2], 
-					   remainingData[3],[remainingData[4], remainingData[5], remainingData[6]], 
-						remainingData[7], remainingData[8], remainingData[9].rstrip("\n")))
+			data = line.split("\"")[2].split(",")
+			movies.append(Movie(title, data[1], data[2], data[3], 
+								[data[4], data[5], data[6]], 
+								data[7], data[8], data[9].rstrip("\n")))
+		else:
+			data = line.split(",")
+			movies.append(Movie(data[0], data[1], data[2], data[3], 
+								[data[4], data[5], data[6]], 
+								data[7], data[8], data[9].rstrip("\n")))
 
 def searchByTitle(message, movies):
 	criteria = input(message + "\n")
